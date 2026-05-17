@@ -4,7 +4,25 @@
     ViewData["Title"] = "Home page";
 }
 
-<div class="text-center">
+<section class="product-grid">
+    @foreach (var product in Model.Products)
+    {
+        <a class="product-card" asp-page="/Products/Details" asp-route-id="@product.Id">
+            <button class="favorite-button" type="button" aria-label="Toevoegen aan favorieten">
+                <i class="fa-regular fa-heart"></i>
+            </button>
+
+            <div class="product-image">
+                <img src="@product.MainImageUrl" alt="@product.Name" />
+            </div>
+
+            <h2>@product.Name</h2>
+
+            <p class="product-card-price">€ @product.Price.ToString("0.00")</p>
+        </a>
+    }
+</section>
+<div class="text-bottom">
     <h1 class="display-4">Welcome</h1>
     <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>

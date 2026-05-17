@@ -1,3 +1,5 @@
+using KlantBestelApplicatie.Data;
+using Microsoft.EntityFrameworkCore;
 namespace KlantBestelApplicatie
 {
     public class Program
@@ -8,6 +10,9 @@ namespace KlantBestelApplicatie
 
             // Add services to the container.
             builder.Services.AddRazorPages();
+
+            builder.Services.AddDbContext<ApplicationDbContext>(options =>
+                options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
             var app = builder.Build();
 

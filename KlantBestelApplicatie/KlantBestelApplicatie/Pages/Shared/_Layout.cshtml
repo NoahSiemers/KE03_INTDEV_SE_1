@@ -1,6 +1,7 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
 <head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - KlantBestelApplicatie</title>
@@ -10,26 +11,31 @@
     <link rel="stylesheet" href="~/KlantBestelApplicatie.styles.css" asp-append-version="true" />
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container">
-                <a class="navbar-brand" asp-area="" asp-page="/Index">KlantBestelApplicatie</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Privacy</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
+    <header class="main-navbar">
+        <div class="navbar-logo">
+            <a asp-page="/Index">LOGO</a>
+        </div>
+
+        <form class="navbar-search" method="get" asp-page="/Index">
+            <input type="text" name="searchTerm" placeholder="Zoeken..." />
+            <button type="submit">
+                <i class="fa-solid fa-magnifying-glass"></i>
+            </button>
+        </form>
+
+        <div class="navbar-icons">
+            <a asp-page="/Favorites">
+                <i class="fa-regular fa-heart"></i>
+            </a>
+
+            <a asp-page="/Account">
+                <i class="fa-regular fa-user"></i>
+            </a>
+
+            <a asp-page="/Cart">
+                <i class="fa-solid fa-cart-shopping"></i>
+            </a>
+        </div>
     </header>
     <div class="container">
         <main role="main" class="pb-3">
