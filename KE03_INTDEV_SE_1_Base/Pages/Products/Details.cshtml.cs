@@ -8,10 +8,12 @@ namespace KE03_INTDEV_SE_1_Base.Pages.Products
     public class DetailsModel : PageModel
     {
         private readonly IProductRepository _productRepository;
+        private readonly ICartRepository _cartRepository;
 
-        public DetailsModel(IProductRepository productRepository)
+        public DetailsModel(IProductRepository productRepository, ICartRepository cartRepository)
         {
             _productRepository = productRepository;
+            _cartRepository = cartRepository;
         }
 
         public Product? Product { get; set; }
@@ -33,7 +35,16 @@ namespace KE03_INTDEV_SE_1_Base.Pages.Products
 
         public IActionResult OnPostOrder(int id)
         {
-            return RedirectToPage("/Products/Details", new { id });
+            int? customerId = HttpContext.Session.GetInt32("CustomerId");
+
+            if (!customerId.HasValue)
+            {
+                return RedirectToPage("/Account");
+            }
+
+            _cartRepository.AddToCart(customerId.Value, id, Amount);
+
+            return RedirectToPage("/Cart");
         }
     }
 }

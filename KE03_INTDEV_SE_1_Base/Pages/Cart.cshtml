@@ -1,0 +1,66 @@
+﻿@page
+@model KE03_INTDEV_SE_1_Base.Pages.CartModel
+
+<section class="cart-page">
+    <h1>Winkelwagen</h1>
+
+    @if (Model.SelectedCustomer != null)
+    {
+        <p>Winkelwagen van: <strong>@Model.SelectedCustomer.Name</strong></p>
+    }
+
+    @if (!Model.CartItems.Any())
+    {
+        <p>Je winkelwagen is leeg.</p>
+    }
+    else
+    {
+        <div class="cart-layout">
+            <section class="cart-items">
+                @foreach (var cartItem in Model.CartItems)
+                {
+                    <article class="cart-item-card">
+                        <a asp-page="/Products/Details" asp-route-id="@cartItem.Product.Id" class="cart-item-image">
+                            <img src="@cartItem.Product.MainImageUrl" alt="@cartItem.Product.Name" />
+                        </a>
+
+                        <div class="cart-item-info">
+                            <h2>@cartItem.Product.Name</h2>
+                            <p>€ @cartItem.Product.Price.ToString("0.00")</p>
+                            <p>Aantal: @cartItem.Amount</p>
+                        </div>
+
+                        <form method="post" asp-page-handler="RemoveFromCart" asp-route-productId="@cartItem.Product.Id">
+                            <button type="submit" class="cart-delete-button" aria-label="Verwijderen uit winkelwagen">
+                                <i class="fa-solid fa-trash"></i>
+                            </button>
+                        </form>
+                    </article>
+                }
+            </section>
+
+            <aside class="cart-summary">
+                <h2>Overzicht</h2>
+
+                <div class="cart-summary-lines">
+                    @foreach (var cartItem in Model.CartItems)
+                    {
+                        <div class="cart-summary-line">
+                            <span>@cartItem.Product.Name</span>
+                            <span>€ @((cartItem.Product.Price * cartItem.Amount).ToString("0.00"))</span>
+                        </div>
+                    }
+                </div>
+
+                <div class="cart-summary-total">
+                    <span>Totaalprijs</span>
+                    <strong>€ @Model.TotalPrice.ToString("0.00")</strong>
+                </div>
+
+                <a asp-page="/Checkout" class="checkout-button">
+                    Naar kassa
+                </a>
+            </aside>
+        </div>
+    }
+</section>

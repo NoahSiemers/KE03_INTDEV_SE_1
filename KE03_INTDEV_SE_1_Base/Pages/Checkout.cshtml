@@ -1,0 +1,82 @@
+﻿@page
+@model KE03_INTDEV_SE_1_Base.Pages.CheckoutModel
+
+<section class="checkout-page">
+    <h1>Kassa</h1>
+
+    @if (Model.SelectedCustomer != null)
+    {
+        <p>Bestellen als: <strong>@Model.SelectedCustomer.Name</strong></p>
+    }
+
+    <form method="post" class="checkout-layout">
+        <section class="checkout-form-card">
+            <h2>Gegevens</h2>
+
+            <div class="checkout-form-grid">
+                <div class="form-field">
+                    <label asp-for="FirstName">Voornaam</label>
+                    <input asp-for="FirstName" />
+                    <span asp-validation-for="FirstName"></span>
+                </div>
+
+                <div class="form-field">
+                    <label asp-for="LastName">Achternaam</label>
+                    <input asp-for="LastName" />
+                    <span asp-validation-for="LastName"></span>
+                </div>
+
+                <div class="form-field">
+                    <label asp-for="Address">Adres</label>
+                    <input asp-for="Address" />
+                    <span asp-validation-for="Address"></span>
+                </div>
+
+                <div class="form-field">
+                    <label asp-for="HouseNumber">Huisnummer</label>
+                    <input asp-for="HouseNumber" />
+                    <span asp-validation-for="HouseNumber"></span>
+                </div>
+
+                <div class="form-field">
+                    <label asp-for="PostalCode">Postcode</label>
+                    <input asp-for="PostalCode" />
+                    <span asp-validation-for="PostalCode"></span>
+                </div>
+
+                <div class="form-field">
+                    <label asp-for="City">Stad</label>
+                    <input asp-for="City" />
+                    <span asp-validation-for="City"></span>
+                </div>
+            </div>
+        </section>
+
+        <aside class="cart-summary">
+            <h2>Overzicht</h2>
+
+            <div class="cart-summary-lines">
+                @foreach (var cartItem in Model.CartItems)
+                {
+                    <div class="cart-summary-line">
+                        <span>@cartItem.Product.Name</span>
+                        <span>€ @((cartItem.Product.Price * cartItem.Amount).ToString("0.00"))</span>
+                    </div>
+                }
+            </div>
+
+            <div class="cart-summary-total">
+                <span>Totaalprijs</span>
+                <strong>€ @Model.TotalPrice.ToString("0.00")</strong>
+            </div>
+
+            <button type="submit" class="checkout-button">
+                Bestellen en betalen
+            </button>
+        </aside>
+    </form>
+</section>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

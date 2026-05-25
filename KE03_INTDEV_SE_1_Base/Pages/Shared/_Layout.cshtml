@@ -28,9 +28,16 @@
                 <i class="fa-regular fa-heart"></i>
             </a>
 
-            <a asp-page="/Account">
-                <i class="fa-regular fa-user"></i>
-            </a>
+            <div class="nav-dropdown">
+                <button type="button" class="nav-icon-button">
+                    <i class="fa-regular fa-user"></i>
+                </button>
+
+                <div class="nav-dropdown-menu">
+                    <a asp-page="/Account">Account</a>
+                    <a asp-page="/OrderHistory">Bestelgeschiedenis</a>
+                </div>
+            </div>
 
             <a asp-page="/Cart">
                 <i class="fa-solid fa-cart-shopping"></i>

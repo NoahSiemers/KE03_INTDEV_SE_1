@@ -16,6 +16,8 @@ namespace DataAccessLayer
         public DbSet<ProductImage> ProductImages { get; set; }
         public DbSet<ProductSpecification> ProductSpecifications { get; set; }
         public DbSet<FavoriteProduct> FavoriteProducts { get; set; }
+        public DbSet<CartItem> CartItems { get; set; }
+        public DbSet<OrderItem> OrderItems { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -60,6 +62,30 @@ namespace DataAccessLayer
             modelBuilder.Entity<FavoriteProduct>()
                 .HasIndex(f => new { f.CustomerId, f.ProductId })
                 .IsUnique();
+
+            modelBuilder.Entity<CartItem>()
+                .HasOne(c => c.Customer)
+                .WithMany()
+                .HasForeignKey(c => c.CustomerId);
+
+            modelBuilder.Entity<CartItem>()
+                .HasOne(c => c.Product)
+                .WithMany()
+                .HasForeignKey(c => c.ProductId);
+
+            modelBuilder.Entity<CartItem>()
+                .HasIndex(c => new { c.CustomerId, c.ProductId })
+                .IsUnique();
+
+            modelBuilder.Entity<Order>()
+                .HasMany(o => o.OrderItems)
+                .WithOne(oi => oi.Order)
+                .HasForeignKey(oi => oi.OrderId);
+
+            modelBuilder.Entity<OrderItem>()
+                .HasOne(oi => oi.Product)
+                .WithMany()
+                .HasForeignKey(oi => oi.ProductId);
 
             base.OnModelCreating(modelBuilder);
         }

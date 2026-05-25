@@ -13,6 +13,8 @@ namespace DataAccessLayer.Interfaces
 
         public Order? GetOrderById(int id);
 
+        public IEnumerable<Order> GetOrdersByCustomerId(int customerId);
+
         public void AddOrder(Order order);
 
         public void UpdateOrder(Order order);
