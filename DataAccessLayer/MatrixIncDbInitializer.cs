@@ -44,9 +44,12 @@ namespace DataAccessLayer
 
             var products = new Product[]
             {
-                new Product { Name = "Nebuchadnezzar", Description = "Het schip waarop Neo voor het eerst de echte wereld leert kennen", Price = 10000.00m, MainImageUrl = "/images/products/nebuchadnezzar.jpg" },
-                new Product { Name = "Jack-in Chair", Description = "Stoel met een rugsteun en metalen armen waarin mensen zitten om ingeplugd te worden in de Matrix via een kabel in de nekpoort", Price = 500.50m, MainImageUrl = "/images/products/jack-in-chair.jpg" },
-                new Product { Name = "EMP (Electro-Magnetic Pulse) Device", Description = "Wapentuig op de schepen van Zion", Price = 129.99m, MainImageUrl = "/images/products/emp-device.jpg" }
+                new Product { Name = "Boormachine GBM 10 RE", Description = "Boormachine GBM 10 RE (Snelspanboorhouder 1 - 10 mm)", Price = 100.99m, MainImageUrl = "/images/products/Bosch.jfif" },
+                new Product { Name = "JMV spaanplaatschroeven", Description = "JMV spaanplaatschroeven 4.0x16mm met verzonken kop - per 200 stuks (VK4016)", Price = 9.99m, MainImageUrl = "/images/products/Schroef.webp" },
+                new Product { Name = "vidaXL Schep", Description = "vidaXL Schep Zwart 68,5 cm Krachtig gecoat staal en massief hout", Price = 24.99m, MainImageUrl = "/images/products/Schep.jpg" },
+                new Product { Name = "Bosch PST 650 Decoupeerzaag", Description = "Bosch PST 650 Decoupeerzaag - op snoer - 500 W", Price = 59.99m, MainImageUrl = "/images/products/Zaag.jpg" },
+                new Product { Name = "Kreator combinatietang", Description = "Kreator combinatietang basic 150mm met PVC handvat (KRT602001)", Price = 14.99m, MainImageUrl = "/images/products/Tang.jpg" },
+                new Product { Name = "BGS Steekringsleutel 36 mm", Description = "BGS 1086 | Steekringsleutel | 36 mm", Price = 19.99m, MainImageUrl = "/images/products/Steekringsleutel.jpg" }
             };
             context.Products.AddRange(products);
 
@@ -61,10 +64,14 @@ namespace DataAccessLayer
 
             var productImages = new ProductImage[]
             {
-                new ProductImage { Product = products[0], ImageUrl = "/images/products/nebuchadnezzar.jpg", AltText = "Nebuchadnezzar hoofdafbeelding"},
-                new ProductImage { Product = products[0], ImageUrl = "/images/products/nebuchadnezzar-2.jpg", AltText = "Nebuchadnezzar extra afbeelding"},
-                new ProductImage { Product = products[1], ImageUrl = "/images/products/jack-in-chair.jpg", AltText = "Jack-in Chair hoofdafbeelding"},
-                new ProductImage { Product = products[2], ImageUrl = "/images/products/emp-device.jpg", AltText = "EMP Device hoofdafbeelding"}
+                new ProductImage { Product = products[0], ImageUrl = "/images/products/Bosch.jfif", AltText = "Boormachine GBM 10 RE hoofdafbeelding"},
+                new ProductImage { Product = products[0], ImageUrl = "/images/products/Bosch1.jpg", AltText = "Boormachine GBM 10 RE extra afbeelding 1"},
+                new ProductImage { Product = products[0], ImageUrl = "/images/products/Bosch2.jpg", AltText = "Boormachine GBM 10 RE extra afbeelding 2"},
+                new ProductImage { Product = products[1], ImageUrl = "/images/products/Schroef.webp", AltText = "JMV spaanplaatschroeven hoofdafbeelding"},
+                new ProductImage { Product = products[2], ImageUrl = "/images/products/Schep.jpg", AltText = "vidaXL Schep hoofdafbeelding"},
+                new ProductImage { Product = products[3], ImageUrl = "/images/products/Zaag.jpg", AltText = "Bosch PST 650 Decoupeerzaag hoofdafbeelding"},
+                new ProductImage { Product = products[4], ImageUrl = "/images/products/Tang.jpg", AltText = "Kreator combinatietang hoofdafbeelding"},
+                new ProductImage { Product = products[5], ImageUrl = "/images/products/Steekringsleutel.jpg", AltText = "BGS Steekringsleutel hoofdafbeelding"}
             };
             context.ProductImages.AddRange(productImages);
 
