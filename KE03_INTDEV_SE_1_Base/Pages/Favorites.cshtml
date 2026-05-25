@@ -1,0 +1,41 @@
+﻿@page
+@model KE03_INTDEV_SE_1_Base.Pages.FavoritesModel
+
+<section class="favorites-page">
+    <h1>Favorieten</h1>
+
+    @if (Model.SelectedCustomer != null)
+    {
+        <p>Favorieten van: <strong>@Model.SelectedCustomer.Name</strong></p>
+    }
+
+    @if (!Model.FavoriteProducts.Any())
+    {
+        <p>Je hebt nog geen favorieten toegevoegd.</p>
+    }
+    else
+    {
+        <section class="product-grid">
+            @foreach (var product in Model.FavoriteProducts)
+            {
+                <article class="product-card-wrapper">
+                    <form method="post" asp-page-handler="RemoveFavorite" asp-route-productId="@product.Id">
+                        <button class="favorite-button" type="submit" aria-label="Verwijderen uit favorieten">
+                            <i class="fa-solid fa-heart"></i>
+                        </button>
+                    </form>
+
+                    <a class="product-card" asp-page="/Products/Details" asp-route-id="@product.Id">
+                        <div class="product-image">
+                            <img src="@product.MainImageUrl" alt="@product.Name" />
+                        </div>
+
+                        <h2>@product.Name</h2>
+
+                        <p class="product-card-price">€ @product.Price.ToString("0.00")</p>
+                    </a>
+                </article>
+            }
+        </section>
+    }
+</section>

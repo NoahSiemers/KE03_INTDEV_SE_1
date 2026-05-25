@@ -1,0 +1,26 @@
+﻿@page
+@model KE03_INTDEV_SE_1_Base.Pages.AccountModel
+
+<section class="account-page">
+    <h1>Account kiezen</h1>
+
+    <p>Kies tijdelijk een gebruiker.</p>
+
+    <div class="account-list">
+        @foreach (var customer in Model.Customers)
+        {
+            <form method="post" asp-page-handler="SelectCustomer">
+                <input type="hidden" name="customerId" value="@customer.Id" />
+
+                <button type="submit" class="account-card @(Model.SelectedCustomerId == customer.Id ? "active-account" : "")">
+                    <span>@customer.Name</span>
+
+                    @if (Model.SelectedCustomerId == customer.Id)
+                    {
+                        <small>Geselecteerd</small>
+                    }
+                </button>
+            </form>
+        }
+    </div>
+</section>

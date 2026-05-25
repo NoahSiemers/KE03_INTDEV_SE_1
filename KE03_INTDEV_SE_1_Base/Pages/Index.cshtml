@@ -1,0 +1,32 @@
+﻿@page
+@model IndexModel
+
+<section class="product-grid">
+    @foreach (var product in Model.Products)
+    {
+        <article class="product-card-wrapper">
+            <form method="post" asp-page-handler="ToggleFavorite" asp-route-productId="@product.Id">
+                <button class="favorite-button" type="submit" aria-label="Toevoegen aan favorieten">
+                    @if (Model.FavoriteProductIds.Contains(product.Id))
+                    {
+                        <i class="fa-solid fa-heart"></i>
+                    }
+                    else
+                    {
+                        <i class="fa-regular fa-heart"></i>
+                    }
+                </button>
+            </form>
+
+            <a class="product-card" asp-page="/Products/Details" asp-route-id="@product.Id">
+                <div class="product-image">
+                    <img src="@product.MainImageUrl" alt="@product.Name" />
+                </div>
+
+                <h2>@product.Name</h2>
+
+                <p class="product-card-price">€ @product.Price.ToString("0.00")</p>
+            </a>
+        </article>
+    }
+</section>
