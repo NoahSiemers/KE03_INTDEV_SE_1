@@ -62,7 +62,7 @@ namespace KE03_INTDEV_SE_1_Base.Pages
 
             if (!customerId.HasValue)
             {
-                return RedirectToPage("/Account");
+                return RedirectToPage("/Account", new { returnUrl = "/Checkout" });
             }
 
             LoadCheckoutData(customerId.Value);
@@ -93,7 +93,7 @@ namespace KE03_INTDEV_SE_1_Base.Pages
 
             if (!customerId.HasValue)
             {
-                return RedirectToPage("/Account");
+                return RedirectToPage("/Account", new { returnUrl = "/Checkout" });
             }
 
             LoadCheckoutData(customerId.Value);

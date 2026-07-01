@@ -58,6 +58,29 @@ namespace DataAccessLayer.Repositories
             _context.SaveChanges();
         }
 
+        public void UpdateAmount(int customerId, int productId, int amount)
+        {
+            if (amount < 1)
+            {
+                amount = 1;
+            }
+
+            var cartItem = _context.CartItems
+                .FirstOrDefault(cartItem =>
+                    cartItem.CustomerId == customerId &&
+                    cartItem.ProductId == productId);
+
+            if (cartItem == null)
+            {
+                return;
+            }
+
+            cartItem.Amount = amount;
+
+            _context.CartItems.Update(cartItem);
+            _context.SaveChanges();
+        }
+
         public void RemoveFromCart(int customerId, int productId)
         {
             var cartItem = _context.CartItems

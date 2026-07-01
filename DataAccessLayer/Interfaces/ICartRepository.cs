@@ -13,6 +13,8 @@ namespace DataAccessLayer.Interfaces
 
         void AddToCart(int customerId, int productId, int amount);
 
+        void UpdateAmount(int customerId, int productId, int amount);
+
         void RemoveFromCart(int customerId, int productId);
 
         void ClearCart(int customerId);

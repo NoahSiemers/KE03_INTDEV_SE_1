@@ -75,20 +75,53 @@ else
         </div>
 
         <aside class="product-details-right">
+            <a asp-page="/Index"
+               asp-route-searchTerm="@Model.SearchTerm"
+               asp-route-category="@Model.Category"
+               asp-route-minPrice="@Model.MinPrice"
+               asp-route-maxPrice="@Model.MaxPrice"
+               asp-route-priceSort="@Model.PriceSort"
+               class="product-back-link">
+                <i class="fa-solid fa-arrow-left"></i>
+                <span>Terug naar producten</span>
+            </a>
+
             <h1>@Model.Product.Name</h1>
 
             <p class="product-detail-price">
                 € @Model.Product.Price.ToString("0.00")
             </p>
 
-            <form method="post" asp-page-handler="Order" asp-route-id="@Model.Product.Id">
+            <form method="post" asp-page-handler="Order" asp-route-id="@Model.Product.Id" class="product-order-form">
+                <input type="hidden" name="SearchTerm" value="@Model.SearchTerm" />
+                <input type="hidden" name="Category" value="@Model.Category" />
+                <input type="hidden" name="MinPrice" value="@Model.MinPrice" />
+                <input type="hidden" name="MaxPrice" value="@Model.MaxPrice" />
+                <input type="hidden" name="PriceSort" value="@Model.PriceSort" />
+
                 <label for="amount">Aantal</label>
                 <input id="amount" type="number" name="Amount" value="1" min="1" />
 
-                <button type="submit" class="order-button">
-                    <i class="fa-solid fa-cart-shopping"></i>
-                    In winkelwagen
-                </button>
+                <div class="product-action-row">
+                    <button type="submit" class="order-button">
+                        <i class="fa-solid fa-cart-shopping"></i>
+                        In winkelwagen
+                    </button>
+
+                    <button type="submit"
+                            formaction="?handler=ToggleFavorite&id=@Model.Product.Id"
+                            class="product-detail-favorite-button"
+                            aria-label="Toevoegen aan favorieten">
+                        @if (Model.IsFavorite)
+                        {
+                            <i class="fa-solid fa-heart"></i>
+                        }
+                        else
+                        {
+                            <i class="fa-regular fa-heart"></i>
+                        }
+                    </button>
+                </div>
             </form>
         </aside>
     </section>

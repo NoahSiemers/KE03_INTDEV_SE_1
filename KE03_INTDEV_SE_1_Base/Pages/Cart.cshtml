@@ -4,9 +4,24 @@
 <section class="cart-page">
     <h1>Winkelwagen</h1>
 
+    @if (TempData["CartMergedMessage"] != null)
+    {
+        <div id="cartMergedMessage" class="cart-merged-message">
+            <span>@TempData["CartMergedMessage"]</span>
+
+            <button type="button" class="cart-merged-close" onclick="document.getElementById('cartMergedMessage').style.display='none'">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </div>
+    }
+
     @if (Model.SelectedCustomer != null)
     {
         <p>Winkelwagen van: <strong>@Model.SelectedCustomer.Name</strong></p>
+    }
+    else
+    {
+        <p>Winkelwagen</p>
     }
 
     @if (!Model.CartItems.Any())
@@ -27,10 +42,19 @@
                         <div class="cart-item-info">
                             <h2>@cartItem.Product.Name</h2>
                             <p>€ @cartItem.Product.Price.ToString("0.00")</p>
-                            <p>Aantal: @cartItem.Amount</p>
+                            <form method="post" asp-page-handler="UpdateAmount" asp-route-productId="@cartItem.ProductId" class="cart-amount-form auto-cart-amount-form">
+                                <label for="amount-@cartItem.ProductId">Aantal</label>
+
+                                <input id="amount-@cartItem.ProductId"
+                                       type="number"
+                                       name="amount"
+                                       value="@cartItem.Amount"
+                                       min="1"
+                                       class="cart-amount-input" />
+                            </form>
                         </div>
 
-                        <form method="post" asp-page-handler="RemoveFromCart" asp-route-productId="@cartItem.Product.Id">
+                        <form method="post" asp-page-handler="RemoveFromCart" asp-route-productId="@cartItem.ProductId">
                             <button type="submit" class="cart-delete-button" aria-label="Verwijderen uit winkelwagen">
                                 <i class="fa-solid fa-trash"></i>
                             </button>
@@ -64,3 +88,21 @@
         </div>
     }
 </section>
+@section Scripts {
+    <script>
+        const cartAmountForms = document.querySelectorAll(".auto-cart-amount-form");
+
+        cartAmountForms.forEach(form => {
+            const input = form.querySelector(".cart-amount-input");
+            let timer;
+
+            input.addEventListener("input", () => {
+                clearTimeout(timer);
+
+                timer = setTimeout(() => {
+                    form.submit();
+                }, 700);
+            });
+        });
+    </script>
+}

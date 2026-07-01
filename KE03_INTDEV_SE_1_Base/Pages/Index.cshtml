@@ -127,7 +127,14 @@
                 </button>
             </form>
 
-            <a class="product-card" asp-page="/Products/Details" asp-route-id="@product.Id">
+            <a class="product-card"
+               asp-page="/Products/Details"
+               asp-route-id="@product.Id"
+               asp-route-searchTerm="@Model.SearchTerm"
+               asp-route-category="@Model.Category"
+               asp-route-minPrice="@Model.MinPrice"
+               asp-route-maxPrice="@Model.MaxPrice"
+               asp-route-priceSort="@Model.PriceSort">
                 <div class="product-image">
                     <img src="@product.MainImageUrl" alt="@product.Name" />
                 </div>
