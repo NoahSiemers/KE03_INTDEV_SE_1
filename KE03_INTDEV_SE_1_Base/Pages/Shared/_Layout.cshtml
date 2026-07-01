@@ -18,7 +18,7 @@
 
         <form class="navbar-search" method="get" asp-page="/Index">
             <input type="text" name="searchTerm" placeholder="Zoeken..." />
-            <button type="submit">
+            <button type="submit" aria-label="Zoeken">
                 <i class="fa-solid fa-magnifying-glass"></i>
             </button>
         </form>
@@ -35,7 +35,7 @@
 
                 <div class="nav-dropdown-menu">
                     <a asp-page="/Account">Account</a>
-                    <a asp-page="/OrderHistory">Bestelgeschiedenis</a>
+                    <a asp-page="/OrderHistory">Bestellingen</a>
                 </div>
             </div>
 

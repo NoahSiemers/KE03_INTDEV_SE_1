@@ -8,7 +8,13 @@
 
     <p>Bestelnummer: <strong>@Model.OrderId</strong></p>
 
-    <a asp-page="/OrderHistory" class="checkout-button">
-        Bekijk bestelgeschiedenis
-    </a>
+    <div class="order-success-actions">
+        <a asp-page="/OrderHistory" class="checkout-button">
+            Bekijk bestellingen
+        </a>
+
+        <a asp-page="/OrderDetails" asp-route-orderId="@Model.OrderId" class="checkout-button">
+            Details
+        </a>
+    </div>
 </section>

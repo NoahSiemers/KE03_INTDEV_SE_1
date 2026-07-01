@@ -1,0 +1,55 @@
+﻿@page
+@model KE03_INTDEV_SE_1_Base.Pages.OrderDetailsModel
+
+@if (Model.Order == null)
+{
+    <p>Bestelling niet gevonden.</p>
+}
+else
+{
+    <section class="order-detail-page">
+        <h1>Bestelling details</h1>
+
+        <a asp-page="/OrderHistory" class="back-button">
+            <i class="fa-solid fa-arrow-left"></i>
+            Terug naar mijn bestellingen
+        </a>
+
+        <div class="order-detail-layout">
+            <section class="order-detail-products">
+                @foreach (var item in Model.Order.OrderItems)
+                {
+                    <a asp-page="/Products/Details" asp-route-id="@item.Product.Id" class="order-detail-product-card">
+                        <div class="order-detail-product-image">
+                            <img src="@item.Product.MainImageUrl" alt="@item.Product.Name" />
+                        </div>
+
+                        <div>
+                            <h2>@item.Product.Name</h2>
+                            <p>Prijs: € @item.PriceAtOrder.ToString("0.00")</p>
+                            <p>Aantal: @item.Amount</p>
+                            <p>Subtotaal: € @((item.PriceAtOrder * item.Amount).ToString("0.00"))</p>
+                        </div>
+                    </a>
+                }
+            </section>
+
+            <aside class="order-detail-summary">
+                <h2>Overzicht</h2>
+
+                <p><strong>Bestelnummer:</strong> #@Model.Order.Id</p>
+                <p><strong>Besteld op:</strong> @Model.Order.OrderDate.ToString("dd-MM-yyyy")</p>
+                <p><strong>Adres:</strong> @Model.Order.Address @Model.Order.HouseNumber, @Model.Order.PostalCode @Model.Order.City</p>
+                <p><strong>Status:</strong> Ontvangen</p>
+                <button type="button" class="return-button">
+                    Retour aanmelden
+                </button>
+
+                <div class="order-detail-total">
+                    <span>Totaal</span>
+                    <strong>€ @Model.Order.TotalPrice.ToString("0.00")</strong>
+                </div>
+            </aside>
+        </div>
+    </section>
+}

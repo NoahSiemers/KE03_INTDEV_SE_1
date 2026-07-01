@@ -4,6 +4,11 @@
 <section class="checkout-page">
     <h1>Kassa</h1>
 
+    <a asp-page="/Cart" class="back-button">
+        <i class="fa-solid fa-arrow-left"></i>
+        Terug naar winkelwagen
+    </a>
+
     @if (Model.SelectedCustomer != null)
     {
         <p>Bestellen als: <strong>@Model.SelectedCustomer.Name</strong></p>
@@ -48,6 +53,20 @@
                     <label asp-for="City">Stad</label>
                     <input asp-for="City" />
                     <span asp-validation-for="City"></span>
+                </div>
+
+                <div class="form-field full-width-field">
+                    <label asp-for="PaymentMethod">Betaalwijze</label>
+                    <select asp-for="PaymentMethod">
+                        <option value="">Kies een betaalwijze</option>
+                        <option value="Creditcard / debitcard">Creditcard / debitcard</option>
+                        <option value="iDEAL">iDEAL</option>
+                        <option value="Apple Pay">Apple Pay</option>
+                        <option value="PayPal">PayPal</option>
+                        <option value="Rekening">Rekening</option>
+                        <option value="Betaal in 3 delen">Betaal in 3 delen</option>
+                    </select>
+                    <span asp-validation-for="PaymentMethod"></span>
                 </div>
             </div>
         </section>

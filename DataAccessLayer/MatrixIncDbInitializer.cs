@@ -27,9 +27,9 @@ namespace DataAccessLayer
             // - Denk aan namen van vliegtuigen            
             var customers = new Customer[]
             {
-                new Customer { Name = "Noah", Address = "123 Elm St" , Active=true},
-                new Customer { Name = "Gebruiker 1", Address = "456 Oak St", Active = true },
-                new Customer { Name = "Gebruiker 2", Address = "789 Pine St", Active = true }
+                new Customer { Name = "Noah", FirstName = "Noah", LastName = "Siemers", Address = "Hoofdstraat", HouseNumber = "12", PostalCode = "6461AB", City = "Kerkrade", Active = true },
+                new Customer { Name = "Gebruiker 1", FirstName = "Gebruiker", LastName = "Een", Address = "Stationsstraat", HouseNumber = "5", PostalCode = "6411CD", City = "Heerlen", Active = true },
+                new Customer { Name = "Gebruiker 2", FirstName = "Gebruiker", LastName = "Twee", Address = "Marktstraat", HouseNumber = "8", PostalCode = "6221EF", City = "Maastricht", Active = true }
             };
             context.Customers.AddRange(customers);
 
@@ -44,12 +44,12 @@ namespace DataAccessLayer
 
             var products = new Product[]
             {
-                new Product { Name = "Boormachine GBM 10 RE", Description = "Boormachine GBM 10 RE (Snelspanboorhouder 1 - 10 mm)", Price = 100.99m, MainImageUrl = "/images/products/Bosch.jfif" },
-                new Product { Name = "JMV spaanplaatschroeven", Description = "JMV spaanplaatschroeven 4.0x16mm met verzonken kop - per 200 stuks (VK4016)", Price = 9.99m, MainImageUrl = "/images/products/Schroef.webp" },
-                new Product { Name = "vidaXL Schep", Description = "vidaXL Schep Zwart 68,5 cm Krachtig gecoat staal en massief hout", Price = 24.99m, MainImageUrl = "/images/products/Schep.jpg" },
-                new Product { Name = "Bosch PST 650 Decoupeerzaag", Description = "Bosch PST 650 Decoupeerzaag - op snoer - 500 W", Price = 59.99m, MainImageUrl = "/images/products/Zaag.jpg" },
-                new Product { Name = "Kreator combinatietang", Description = "Kreator combinatietang basic 150mm met PVC handvat (KRT602001)", Price = 14.99m, MainImageUrl = "/images/products/Tang.jpg" },
-                new Product { Name = "BGS Steekringsleutel 36 mm", Description = "BGS 1086 | Steekringsleutel | 36 mm", Price = 19.99m, MainImageUrl = "/images/products/Steekringsleutel.jpg" }
+                new Product { Name = "Boormachine GBM 10 RE", Description = "Boormachine GBM 10 RE (Snelspanboorhouder 1 - 10 mm)", Price = 100.99m, MainImageUrl = "/images/products/Bosch.jfif", Category = "Gereedschap" },
+                new Product { Name = "JMV spaanplaatschroeven", Description = "JMV spaanplaatschroeven 4.0x16mm met verzonken kop - per 200 stuks (VK4016)", Price = 9.99m, MainImageUrl = "/images/products/Schroef.webp", Category = "Schroef" },
+                new Product { Name = "vidaXL Schep", Description = "vidaXL Schep Zwart 68,5 cm Krachtig gecoat staal en massief hout", Price = 24.99m, MainImageUrl = "/images/products/Schep.jpg", Category = "Tuin" },
+                new Product { Name = "Bosch PST 650 Decoupeerzaag", Description = "Bosch PST 650 Decoupeerzaag - op snoer - 500 W", Price = 59.99m, MainImageUrl = "/images/products/Zaag.jpg", Category = "Gereedschap" },
+                new Product { Name = "Kreator combinatietang", Description = "Kreator combinatietang basic 150mm met PVC handvat (KRT602001)", Price = 14.99m, MainImageUrl = "/images/products/Tang.jpg", Category = "Gereedschap" },
+                new Product { Name = "BGS Steekringsleutel 36 mm", Description = "BGS 1086 | Steekringsleutel | 36 mm", Price = 19.99m, MainImageUrl = "/images/products/Steekringsleutel.jpg", Category = "Gereedschap" }
             };
             context.Products.AddRange(products);
 

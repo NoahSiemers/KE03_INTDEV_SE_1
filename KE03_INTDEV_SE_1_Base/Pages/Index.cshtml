@@ -1,6 +1,115 @@
 ﻿@page
 @model IndexModel
 
+<section class="product-filter-bar">
+    <form method="get" asp-page="/Index" class="filter-form" id="filterForm">
+        <input type="hidden" name="searchTerm" value="@Model.SearchTerm" />
+
+        <button type="button" class="filter-toggle-button">
+            <i class="fa-solid fa-filter"></i>
+            Filter
+        </button>
+
+        <div class="custom-filter-dropdown">
+            <button type="button" class="custom-filter-button">
+                @(string.IsNullOrWhiteSpace(Model.Category) ? "Alle categorieën" : Model.Category)
+                <i class="fa-solid fa-chevron-down"></i>
+            </button>
+
+            <div class="custom-filter-menu">
+                <label>
+                    <input type="radio" name="category" value="" checked="@(string.IsNullOrWhiteSpace(Model.Category))" />
+                    Alle categorieën
+                </label>
+
+                <label>
+                    <input type="radio" name="category" value="Gereedschap" checked="@(Model.Category == "Gereedschap")" />
+                    Gereedschap
+                </label>
+
+                <label>
+                    <input type="radio" name="category" value="Schroef" checked="@(Model.Category == "Schroef")" />
+                    Schroef
+                </label>
+
+                <label>
+                    <input type="radio" name="category" value="Tuin" checked="@(Model.Category == "Tuin")" />
+                    Tuin
+                </label>
+            </div>
+        </div>
+
+        <div class="custom-filter-dropdown">
+            <button type="button" class="custom-filter-button">
+                Prijs
+                <i class="fa-solid fa-chevron-down"></i>
+            </button>
+
+            <div class="custom-filter-menu price-menu">
+                <div class="price-input-row">
+                    <div>
+                        <label>Min prijs</label>
+                        <input type="number" step="0.01" min="0" name="minPrice" value="@Model.MinPrice" placeholder="Min" />
+                    </div>
+
+                    <div>
+                        <label>Max prijs</label>
+                        <input type="number" step="0.01" min="0" name="maxPrice" value="@Model.MaxPrice" placeholder="Max" />
+                    </div>
+                </div>
+
+                <label>
+                    <input type="radio" name="priceSort" value="price-low-high" checked="@(Model.PriceSort == "price-low-high")" />
+                    Prijs laag naar hoog
+                </label>
+
+                <label>
+                    <input type="radio" name="priceSort" value="price-high-low" checked="@(Model.PriceSort == "price-high-low")" />
+                    Prijs hoog naar laag
+                </label>
+            </div>
+        </div>
+
+        <button type="submit" class="apply-filter-button">
+            Toepassen
+        </button>
+
+        <a asp-page="/Index" class="clear-filter-link">Wissen</a>
+    </form>
+</section>
+
+<script>
+    const filterDropdowns = document.querySelectorAll(".custom-filter-dropdown");
+
+    filterDropdowns.forEach(dropdown => {
+        const button = dropdown.querySelector(".custom-filter-button");
+
+        button.addEventListener("click", (event) => {
+            event.stopPropagation();
+
+            filterDropdowns.forEach(otherDropdown => {
+                if (otherDropdown !== dropdown) {
+                    otherDropdown.classList.remove("open");
+                }
+            });
+
+            dropdown.classList.toggle("open");
+        });
+    });
+
+    document.addEventListener("click", () => {
+        filterDropdowns.forEach(dropdown => {
+            dropdown.classList.remove("open");
+        });
+    });
+
+    document.querySelectorAll(".custom-filter-menu").forEach(menu => {
+        menu.addEventListener("click", (event) => {
+            event.stopPropagation();
+        });
+    });
+</script>
+
 <section class="product-grid">
     @foreach (var product in Model.Products)
     {

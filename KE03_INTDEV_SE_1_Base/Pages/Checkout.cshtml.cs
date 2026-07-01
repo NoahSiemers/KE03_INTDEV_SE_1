@@ -52,6 +52,10 @@ namespace KE03_INTDEV_SE_1_Base.Pages
         [Required(ErrorMessage = "Stad is verplicht.")]
         public string City { get; set; } = string.Empty;
 
+        [BindProperty]
+        [Required(ErrorMessage = "Betaalwijze is verplicht.")]
+        public string PaymentMethod { get; set; } = string.Empty;
+
         public IActionResult OnGet()
         {
             int? customerId = HttpContext.Session.GetInt32("CustomerId");
@@ -67,6 +71,18 @@ namespace KE03_INTDEV_SE_1_Base.Pages
             {
                 return RedirectToPage("/Cart");
             }
+
+            if (SelectedCustomer != null)
+            {
+                FirstName = SelectedCustomer.FirstName;
+                LastName = SelectedCustomer.LastName;
+                Address = SelectedCustomer.Address;
+                HouseNumber = SelectedCustomer.HouseNumber;
+                PostalCode = SelectedCustomer.PostalCode;
+                City = SelectedCustomer.City;
+            }
+
+            PaymentMethod = "iDEAL";
 
             return Page();
         }
@@ -102,7 +118,8 @@ namespace KE03_INTDEV_SE_1_Base.Pages
                 HouseNumber = HouseNumber,
                 PostalCode = PostalCode,
                 City = City,
-                TotalPrice = TotalPrice
+                TotalPrice = TotalPrice,
+                PaymentMethod = PaymentMethod
             };
 
             foreach (var cartItem in CartItems)

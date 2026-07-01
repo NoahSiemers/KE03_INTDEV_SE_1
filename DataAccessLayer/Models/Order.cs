@@ -31,6 +31,9 @@ namespace DataAccessLayer.Models
 
         public decimal TotalPrice { get; set; }
 
+        public string PaymentMethod { get; set; } = string.Empty;
+
+
         public ICollection<OrderItem> OrderItems { get; } = new List<OrderItem>();
 
         public ICollection<Product> Products { get; } = new List<Product>();

@@ -1,8 +1,8 @@
 ﻿@page
 @model KE03_INTDEV_SE_1_Base.Pages.OrderHistoryModel
 
-<section class="order-history-page">
-    <h1>Bestelgeschiedenis</h1>
+<section class="orders-page">
+    <h1>Mijn bestellingen</h1>
 
     @if (Model.SelectedCustomer != null)
     {
@@ -15,34 +15,38 @@
     }
     else
     {
-        <div class="order-history-list">
+        <div class="orders-list">
             @foreach (var order in Model.Orders)
             {
-                <article class="order-history-card">
-                    <div class="order-history-header">
-                        <h2>Bestelling #@order.Id</h2>
-                        <span>@order.OrderDate.ToString("dd-MM-yyyy HH:mm")</span>
+                <article class="order-card-new">
+                    <div class="order-left">
+                        <h2>Bestelnummer: #@order.Id</h2>
+                        <p>Besteld op: @order.OrderDate.ToString("dd-MM-yyyy")</p>
+
+                        <div class="order-products-list">
+                            @foreach (var item in order.OrderItems)
+                            {
+                                <p>@item.Product.Name x @item.Amount</p>
+                            }
+                        </div>
+
                     </div>
 
-                    <p>
-                        Bezorgadres:
-                        @order.Address @order.HouseNumber,
-                        @order.PostalCode @order.City
-                    </p>
+                    <div class="order-right">
+                        <p><strong>Adres:</strong> @order.Address @order.HouseNumber, @order.PostalCode @order.City</p>
+                        <p><strong>Status:</strong> Ontvangen</p>
 
-                    <div class="order-products">
-                        @foreach (var item in order.OrderItems)
-                        {
-                            <div class="order-product-line">
-                                <span>@item.Product.Name x @item.Amount</span>
-                                <span>€ @((item.PriceAtOrder * item.Amount).ToString("0.00"))</span>
-                            </div>
-                        }
+                        <button type="button" class="return-button">
+                            Retour aanmelden
+                        </button>
                     </div>
 
-                    <div class="order-history-total">
-                        <span>Totaal</span>
-                        <strong>€ @order.TotalPrice.ToString("0.00")</strong>
+                    <div class="order-bottom">
+                        <a asp-page="/OrderDetails" asp-route-orderId="@order.Id" class="order-details-link">
+                            Details
+                        </a>
+
+                        <strong>Totaal: € @order.TotalPrice.ToString("0.00")</strong>
                     </div>
                 </article>
             }

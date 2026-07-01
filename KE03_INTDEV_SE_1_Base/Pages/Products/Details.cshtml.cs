@@ -21,6 +21,9 @@ namespace KE03_INTDEV_SE_1_Base.Pages.Products
         [BindProperty]
         public int Amount { get; set; } = 1;
 
+        public IEnumerable<CartItem> CartItems { get; set; } = new List<CartItem>();
+        public decimal CartTotalPrice { get; set; }
+
         public IActionResult OnGet(int id)
         {
             Product = _productRepository.GetProductById(id);
@@ -28,6 +31,14 @@ namespace KE03_INTDEV_SE_1_Base.Pages.Products
             if (Product == null)
             {
                 return NotFound();
+            }
+
+            int? customerId = HttpContext.Session.GetInt32("CustomerId");
+
+            if (customerId.HasValue)
+            {
+                CartItems = _cartRepository.GetCartItemsByCustomerId(customerId.Value);
+                CartTotalPrice = CartItems.Sum(cartItem => cartItem.Product.Price * cartItem.Amount);
             }
 
             return Page();
@@ -44,7 +55,9 @@ namespace KE03_INTDEV_SE_1_Base.Pages.Products
 
             _cartRepository.AddToCart(customerId.Value, id, Amount);
 
-            return RedirectToPage("/Cart");
+            TempData["CartMessage"] = "Succesvol aan winkelwagen toegevoegd";
+
+            return RedirectToPage("/Products/Details", new { id });
         }
     }
 }
